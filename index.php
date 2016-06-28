@@ -168,21 +168,34 @@
 			<div class="message">
 			<?php
 					//if "email" variable is filled out, send email
-					  if (isset($_REQUEST['email']))  {
+					  if ((isset($_REQUEST['email']))&& (isset($_REQUEST['email'])!=""))  {
 					  
 							  //Email information
 							  
-							$admin_email  = "mobarokaiub@gmail.com";
+							
 							$name = $_REQUEST['name'];
 							$message = $_REQUEST['comment'];;
 							$email = $_REQUEST['email'];
 							$subject = $_REQUEST['subject'];
 							  //send email
-					  if (mail($admin_email, "$subject", $name, "From:" . $email)){
-					  
-							//Email response
-							echo "<h3>Send Successfully. Thank you for contacting us. </h3>";
-					  }else
+					 $mail->setFrom('contact@miadw.com', 'My Contact');
+					$mail->addAddress('mobarokaiub@gmail.com');               // Name is optional
+					$mail->addReplyTo($email, $name);
+
+
+					$mail->isHTML(True);                                  // Set email format to HTML
+
+					$strbody = "Name: ".$name."<br/>"."Message: ".$message;
+
+					$mail->Subject = $subject;
+					$mail->Body    = $strbody;;
+					$mail->AltBody = 'CapitalforYourBusiness.com contact infomation or comment.';
+
+					if(!$mail->send()) {
+						echo 'Message could not be sent.';
+					echo 'Mailer Error: ' . $mail->ErrorInfo;
+}
+else
 					  {
 						  echo "<h3> Sorry please file all field or server sending error.</h3>";
 					  }
@@ -191,10 +204,10 @@
 					  
 			?>
 				<form action="index.php" method="POST">
-					<input type="text" name="name" class="m_input" placeholder="NAME"/>
-					<input type="email" name="email" class="m_input" placeholder="EMAIL ADDRESS"/>
-					<input type="text" name="subject" class="m_input" placeholder="SUBJECT"/>
-					<textarea cols="30" rows="4" name="comment" placeholder="Message"></textarea></br>
+					<input type="text" name="name" class="m_input" placeholder="NAME" required/>
+					<input type="email" name="email" class="m_input" placeholder="EMAIL ADDRESS" required/>
+					<input type="text" name="subject" class="m_input" placeholder="SUBJECT" required/>
+					<textarea cols="30" rows="4" name="comment" placeholder="Message" required></textarea></br>
 					<input type="submit" value="submit" class="submit"/>
 				</form>
 			</div>
