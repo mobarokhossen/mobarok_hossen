@@ -15,8 +15,14 @@ body{
 }
 
 .header{
-	width: 100%;
+	width: 80%;
 	background-color: #ECF0F1;
+	margin-bottom: 50px;
+	overflow: hidden;
+	position: fixed;
+	top: 0px;
+	display: block;
+	z-index: 999;
 }
 .header:after{
 	content: '';
@@ -53,7 +59,7 @@ body{
 	
 .nav{
 	width: 70%;
-	float: right;
+	float: left;
 }	
 
 .nav ul {

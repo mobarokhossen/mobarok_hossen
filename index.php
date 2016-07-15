@@ -14,7 +14,7 @@
 	<div class="wrapper">
 		<div class="header">
 			<div class="name">
-				<a href="index.php">
+				<a name="home">
 					<span class="my">Mobarok</span>
 					<span class="folio">Hossen</span>
 				</a>
@@ -24,7 +24,7 @@
 			</div>
 			<div class="nav">
 				<ul>
-					<li><a href="#home" name="home">Home</a></li>
+					<li><a href="#home">Home</a></li>
 					<li><a href="#about">About me</a></li>
 					<li><a href="#service">Service</a></li>
 					<li><a href="#work">My Work</a></li>
@@ -171,31 +171,33 @@
 					  if ((isset($_REQUEST['email']))&& (isset($_REQUEST['email'])!=""))  {
 					  
 							  //Email information
-							  
+							  require './mailer/PHPMailerAutoload.php';
+							  $mail = new PHPMailer;
 							
 							$name = $_REQUEST['name'];
 							$message = $_REQUEST['comment'];;
 							$email = $_REQUEST['email'];
 							$subject = $_REQUEST['subject'];
 							  //send email
-					 $mail->setFrom('contact@miadw.com', 'My Contact');
-					$mail->addAddress('mobarokaiub@gmail.com');               // Name is optional
-					$mail->addReplyTo($email, $name);
+							$mail->setFrom('contact@miadw.com', 'My Contact');
+							$mail->addAddress('mobarokaiub@gmail.com');               // Name is optional
+							$mail->addReplyTo($email, $name);
 
 
 					$mail->isHTML(True);                                  // Set email format to HTML
 
-					$strbody = "Name: ".$name."<br/>"."Message: ".$message;
+					$strbody = "<h2>Name: ".$name."</h2><br/>"."<h3>Message: ".$message."</h3>";
 
 					$mail->Subject = $subject;
-					$mail->Body    = $strbody;;
+					$mail->Body    = $strbody;
 					$mail->AltBody = 'CapitalforYourBusiness.com contact infomation or comment.';
 
-					if(!$mail->send()) {
-						echo 'Message could not be sent.';
-					echo 'Mailer Error: ' . $mail->ErrorInfo;
-}
-else
+					if(!$mail->send())
+						{
+							echo 'Message could not be sent.';
+							echo 'Mailer Error: ' . $mail->ErrorInfo;
+						}
+						else
 					  {
 						  echo "<h3> Sorry please file all field or server sending error.</h3>";
 					  }
