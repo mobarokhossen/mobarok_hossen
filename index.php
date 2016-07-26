@@ -15,14 +15,14 @@
 		<div class="header">
 			<div class="name">
 				<a name="home">
-					<span class="my">Mobarok</span>
-					<span class="folio">Hossen</span>
+					<span class="my">Mobarok &nbsp;</span>
+					<span class="folio"> Hossen</span>
 				</a>
 			</div>
 			<div class="menu">
 				<a href="#" id="menu_bar"><i class="fa fa-bars" aria-hidden="true"></i>Menu</a>
 			</div>
-			<div class="nav">
+			<div class="nav" >
 				<ul>
 					<li><a href="#home">Home</a></li>
 					<li><a href="#about">About me</a></li>
